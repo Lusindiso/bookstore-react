@@ -5,7 +5,18 @@ import { sendBooksData } from '../../redux/books/booksActions';
 import classes from './AddBook.module.css';
 
 const AddBook = () => {
-	@@ -19,11 +20,17 @@ const AddBook = () => {
+  const [title, setTitle] = useState('');
+  const [author, setAuthor] = useState('');
+
+  const titleChangeHandler = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const authorChangeHandler = (e) => {
+    setAuthor(e.target.value);
+  };
+
+  const dispatch = useDispatch();
   const submitHandler = (e) => {
     e.preventDefault();
     if (title.length > 2 && author.length > 2) {
@@ -23,7 +34,8 @@ const AddBook = () => {
       setTitle('');
       setAuthor('');
     }
-	@@ -32,8 +39,18 @@ const AddBook = () => {
+  };
+  return (
     <div className={classes.addbook}>
       <h2>ADD NEW BOOK</h2>
       <form onSubmit={submitHandler}>

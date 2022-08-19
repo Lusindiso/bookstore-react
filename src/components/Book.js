@@ -1,12 +1,14 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 import { booksActions } from '../redux/books/books';
+import { deleteBookData } from '../redux/books/booksActions';
 import classes from './Book.module.css';
 
 const Book = ({ id, title, author }) => {
   const dispatch = useDispatch();
 
   const removeBookHandler = (e) => {
+    dispatch(deleteBookData(e.target.id));
     dispatch(booksActions.removeBook(e.target.id));
   };
   return (
@@ -15,7 +17,9 @@ const Book = ({ id, title, author }) => {
       <div className="author">{author}</div>
       <div className={classes.buttons}>
         <button type="button">Comments</button>
-        <button id={id} type="button" onClick={removeBookHandler}>Remove</button>
+        <button id={id} type="button" onClick={removeBookHandler}>
+          Remove
+        </button>
         <button type="button">Edit</button>
       </div>
     </div>
