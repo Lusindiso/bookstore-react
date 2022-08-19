@@ -7,10 +7,7 @@ const Categories = () => {
   const dispatch = useDispatch();
 
   const clickHandler = () => {
-    console.log(category)
-
     dispatch(categoriesActions.checkStatus());
-    console.log(category)
   };
   return (
     <main>
