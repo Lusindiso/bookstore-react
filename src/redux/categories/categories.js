@@ -2,10 +2,11 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const categories = createSlice({
   name: 'category',
-  initialState: { category: [] },
+  initialState: { category: '' },
   reducers: {
-    checkStatus() {
-      return 'Under construction';
+    checkStatus(state) {
+      // eslint-disable-next-line no-param-reassign
+      state.category = 'Under construction';
     },
   },
 });
