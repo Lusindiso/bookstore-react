@@ -1,5 +1,3 @@
-/* eslint-disable no-restricted-syntax */
-/* eslint-disable guard-for-in */
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { displayBooks } from '../../redux/books/books';
