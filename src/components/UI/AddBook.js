@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { booksActions } from '../../redux/books/books';
-import { sendBooksData } from '../../redux/books/booksActions';
+import { addBook } from '../../redux/books/books';
 import classes from './AddBook.module.css';
 
 const AddBook = () => {
@@ -26,13 +25,10 @@ const AddBook = () => {
         author,
         category: 'Action',
       };
-      dispatch(sendBooksData(newBook));
-      const key = newBook.id;
-      const obj = {};
-      obj[key] = [newBook];
-      dispatch(booksActions.addBook(obj));
+      dispatch(addBook(newBook));
       setTitle('');
       setAuthor('');
+      
     }
   };
   return (

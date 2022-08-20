@@ -1,15 +1,13 @@
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
-import { booksActions } from '../redux/books/books';
-import { deleteBookData } from '../redux/books/booksActions';
+import { removeBook } from '../redux/books/books';
 import classes from './Book.module.css';
 
 const Book = ({ id, title, author }) => {
   const dispatch = useDispatch();
 
   const removeBookHandler = (e) => {
-    dispatch(deleteBookData(e.target.id));
-    dispatch(booksActions.removeBook(e.target.id));
+    dispatch(removeBook(e.target.id));
   };
   return (
     <div className={classes.book}>

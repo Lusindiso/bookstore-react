@@ -2,34 +2,27 @@
 /* eslint-disable guard-for-in */
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchBooksData } from '../../redux/books/booksActions';
+import { displayBooks } from '../../redux/books/books';
 import Book from '../Book';
 import AddBook from '../UI/AddBook';
 
 const Books = () => {
   const dispatch = useDispatch();
-  const books = useSelector((state) => state.books.books);
+  const books = useSelector((state) => state.books);
   useEffect(() => {
-    dispatch(fetchBooksData());
-  }, [dispatch]);
+    dispatch(displayBooks());
+  }, []);
 
   const bookList = [];
-
-  for (const key in books) {
-    bookList.push(
-      <Book
-        key={key}
-        id={key}
-        author={books[key][0].author}
-        title={books[key][0].title}
-      />,
-    );
-  }
-
   return (
     <main>
       <div className="container">
-        {bookList}
+        {books.map(book=><Book
+    key={book.id}
+    id={book.id}
+    author={book.author}
+    title={book.title}
+  />,)}
         <AddBook />
       </div>
     </main>
