@@ -3,7 +3,9 @@ import { useDispatch } from 'react-redux';
 import { removeBook } from '../redux/books/books';
 import classes from './Book.module.css';
 
-const Book = ({ id, title, author, category }) => {
+const Book = ({
+  id, title, author, category
+}) => {
   const dispatch = useDispatch();
 
   const removeBookHandler = (e) => {
