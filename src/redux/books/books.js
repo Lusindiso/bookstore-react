@@ -1,31 +1,99 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const initialState = {
-  books: [
-    {
-      id: '255459688',
-      author: 'Frank Herbit',
-      title: 'Dune',
-    },
-    {
-      id: '20322515231530',
-      author: 'Suzanne Collins',
-      title: 'Capital in the Twenty-First Century',
-    },
-  ],
+const requestedURL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/5ZyxeaNJQ7Ur6KUQjhUz/books';
+
+// ACTIONS
+const ADD_BOOK = 'bookstore/books/ADD_BOOK';
+const REMOVE_BOOK = 'bookstore/books/REMOVE_BOOK';
+const DISPLAY_BOOKS = 'bookstore/books/DISPLAY_BOOKS';
+
+const initialState = [];
+
+// REDUCER
+const booksReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case DISPLAY_BOOKS:
+      return action.payload;
+    case ADD_BOOK:
+      return [...state, action.payload];
+    case REMOVE_BOOK:
+      return [...state.filter((book) => book.id !== action.payload.id)];
+    default:
+      return state;
+  }
 };
-const books = createSlice({
-  name: 'book',
-  initialState,
-  reducers: {
-    addBook(state, action) {
-      state.books.push(action.payload);
-    },
-    removeBook(state, action) {
-      // eslint-disable-next-line no-param-reassign
-      state.books = state.books.filter((book) => book.id !== action.payload);
-    },
+
+const toArray = (data) => {
+  const bookArray = Object.entries(data).map(([key, val]) => {
+    const { title, author, category } = val[0];
+    return {
+      id: key,
+      title,
+      author,
+      category,
+    };
+  });
+
+  return bookArray;
+};
+
+export const displayBooks = createAsyncThunk(
+  DISPLAY_BOOKS,
+  async (post, { dispatch }) => {
+    const response = await fetch(requestedURL);
+    const data = await response.json();
+    const books = toArray(data);
+    if (books) {
+      dispatch({
+        type: DISPLAY_BOOKS,
+        payload: books,
+      });
+    }
   },
-});
-export const booksActions = books.actions;
-export default books;
+);
+
+export const addBook = createAsyncThunk(
+  ADD_BOOK,
+  async (book, { dispatch }) => {
+    const response = await fetch(requestedURL, {
+      method: 'POST',
+      body: JSON.stringify({
+        item_id: book.id,
+        title: book.title,
+        author: book.author,
+        category: book.category,
+      }),
+      headers: { 'Content-type': 'application/json; charset=UTF-8' },
+    });
+    if (response.status === 201) {
+      dispatch({
+        type: ADD_BOOK,
+        payload: book,
+      });
+    }
+  },
+);
+
+export const removeBook = createAsyncThunk(
+  REMOVE_BOOK,
+  async (id, { dispatch }) => {
+    const url = `${requestedURL}/${id}`;
+    const response = await fetch(url, {
+      method: 'DELETE',
+      body: JSON.stringify({ item_id: id }),
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+      },
+    });
+    if (response.status === 201) {
+      dispatch({
+        type: REMOVE_BOOK,
+        payload: {
+          id,
+        },
+      });
+    }
+  },
+);
+
+export default booksReducer;
