@@ -6,6 +6,7 @@ import classes from './AddBook.module.css';
 const AddBook = () => {
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
+  const [category, setCategory] = useState('action');
 
   const titleChangeHandler = (e) => {
     setTitle(e.target.value);
@@ -13,6 +14,10 @@ const AddBook = () => {
 
   const authorChangeHandler = (e) => {
     setAuthor(e.target.value);
+  };
+
+  const categoryChangeHandler = (e) => {
+    setCategory(e.target.value);
   };
 
   const dispatch = useDispatch();
@@ -23,11 +28,12 @@ const AddBook = () => {
         id: Math.random().toString(),
         title,
         author,
-        category: 'Action',
+        category,
       };
       dispatch(addBook(newBook));
       setTitle('');
       setAuthor('');
+      setCategory('action');
     }
   };
   return (
@@ -46,6 +52,15 @@ const AddBook = () => {
           onChange={authorChangeHandler}
           value={author}
         />
+        <select
+          value={category}
+          onChange={categoryChangeHandler}
+          className={classes.select}
+        >
+          <option value="action">Action</option>
+          <option value="economy">Economy</option>
+          <option value="science fiction">Science Fiction</option>
+        </select>
         <button type="submit">Add Book</button>
       </form>
     </div>

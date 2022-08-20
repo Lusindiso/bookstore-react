@@ -17,7 +17,7 @@ const Books = () => {
     <main>
       <div className="container">
         {books.map(
-          (book) => <Book key={book.id} id={book.id} author={book.author} title={book.title} />,
+          (book) => <Book key={book.id} id={book.id} author={book.author} title={book.title} category={books.category} />,
         )}
         <AddBook />
       </div>
