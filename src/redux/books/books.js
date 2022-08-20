@@ -1,7 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-const baseURL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi';
-const apiKey = '5ZyxeaNJQ7Ur6KUQjhUz';
 const requestedURL = 'https://us-central1-bookstore-api-e63c8.cloudfunctions.net/bookstoreApi/apps/5ZyxeaNJQ7Ur6KUQjhUz/books';
 
 // ACTIONS
