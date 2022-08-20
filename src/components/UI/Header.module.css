@@ -1,5 +1,5 @@
 .header {
-  height: 6.25rem;
+  height: 6rem;
   margin: 0 auto;
   padding: 1.4rem 3rem;
   background-color: #fff;
@@ -21,19 +21,4 @@
   display: flex;
   align-items: center;
   list-style: none;
-}
-
-.header a {
-  padding: 10px 20px;
-  font-size: 1.1rem;
-  text-decoration: none;
-  color: black;
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
 }

@@ -5,18 +5,22 @@
   margin: 0;
   box-sizing: inherit;
 }
-
 html {
   box-sizing: border-box;
 }
-
 body {
   background: #f5f6fa;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
 }
-
 main {
   padding: 0 3rem;
+}
+
+#root {
+  width: 80%;
+  margin: 50px auto 0 auto;
+  padding-bottom: 10rem;
+  background-color: white;
 }
 
 .container {
