@@ -25,3 +25,10 @@
 .buttons > *:not(:last-child) {
   border-right: 1px solid black;
 }
+
+.category {
+  color: rgb(100, 96, 96);
+  font-weight: bold;
+  margin-top: 5px;
+  text-transform: capitalize;
+}

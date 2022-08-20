@@ -10,13 +10,20 @@ const Books = () => {
   useEffect(() => {
     dispatch(displayBooks());
   }, []);
+  const bookList = books.map((book) => (
+    <Book
+      key={book.id}
+      id={book.id}
+      author={book.author}
+      title={book.title}
+      category={book.category}
+    />
+  ));
 
   return (
     <main>
       <div className="container">
-        {books.map(
-          (book) => <Book key={book.id} id={book.id} author={book.author} title={book.title} />,
-        )}
+        {bookList}
         <AddBook />
       </div>
     </main>

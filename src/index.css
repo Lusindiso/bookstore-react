@@ -19,6 +19,13 @@ main {
   padding: 0 3rem;
 }
 
+#root {
+  width: 80%;
+  margin: 50px auto 0 auto;
+  padding-bottom: 10rem;
+  background-color: white;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
